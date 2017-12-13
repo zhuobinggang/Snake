@@ -3,13 +3,15 @@ import java.util.ArrayList;
 
 //Controls all the game logic .. most important class in this project.
 public class ThreadsController extends Thread {
+     //All block list,contains food and snake
 	 ArrayList<ArrayList<DataOfSquare>> Squares= new ArrayList<ArrayList<DataOfSquare>>();
-	 Tuple headSnakePos;
+
+	 Tuple headSnakePos;//The head of snake
 	 int sizeSnake=3;
 	 long speed = 50;
 	 public static int directionSnake ;
 
-	 ArrayList<Tuple> positions = new ArrayList<Tuple>();
+	 ArrayList<Tuple> positions = new ArrayList<Tuple>();//Snake positions
 	 Tuple foodPosition;
 	 
 	 //Constructor of ControlleurThread 
@@ -23,7 +25,8 @@ public class ThreadsController extends Thread {
 		//!!! Pointer !!!!
 		Tuple headPos = new Tuple(headSnakePos.getX(),headSnakePos.getY());
 		positions.add(headPos);
-		
+
+		//Put the food to right bottom of the screen
 		foodPosition= new Tuple(Window.height-1,Window.width-1);
 		spawnFood(foodPosition);
 
@@ -32,10 +35,15 @@ public class ThreadsController extends Thread {
 	 //Important part :
 	 public void run() {
 		 while(true){
+		     //Move the snake
 			 moveInterne(directionSnake);
+
 			 checkCollision();
+
 			 moveExterne();
 			 deleteTail();
+
+			 //sleep 'sleep' ms
 			 pauser();
 		 }
 	 }

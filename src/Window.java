@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 
 class Window extends JFrame{
 	private static final long serialVersionUID = -2542001418764869760L;
+	private ThreadsController c;
 	public static ArrayList<ArrayList<DataOfSquare>> Grid;
 	public static int width = 20;
 	public static int height = 20;
@@ -40,7 +41,7 @@ class Window extends JFrame{
 		// initial position of the snake
 		Tuple position = new Tuple(10,10);
 		// passing this value to the controller
-		ThreadsController c = new ThreadsController(position);
+		c = new ThreadsController(position);
 		//Let's start the game now..
 		c.start();
 
@@ -54,4 +55,8 @@ class Window extends JFrame{
 		//c2.start();
 		
 	}
+
+	public int getScore(){
+	    return c.sizeSnake - 3;
+    }
 }
